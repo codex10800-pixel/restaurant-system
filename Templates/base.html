@@ -1,0 +1,341 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{% block title %}Molteno Grill House{% endblock %}</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #FF5A3C;
+    --secondary: #FFD166;
+    --accent: #06D6A0;
+
+    --bg: #FFF8F4;
+    --card: #FFFFFF;
+
+    --text: #2B2B2B;
+    --muted: #777;
+
+    --shadow: 0 10px 40px rgba(0,0,0,0.08);
+    --shadow-strong: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+h1,h2,h3{
+    font-family:'Playfair Display',serif;
+}
+
+/* HEADER */
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,0.3);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,0,0,0.05);
+}
+
+nav{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 20px;
+}
+
+.logo{
+    font-size:1.4rem;
+    color:var(--primary);
+    font-weight:700;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+    align-items:center;
+}
+
+nav a{
+    text-decoration:none;
+    color:var(--text);
+    font-size:0.85rem;
+    letter-spacing:1px;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:var(--primary);
+}
+
+.nav-cart{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    padding:8px 15px;
+    background:var(--primary);
+    color:#fff;
+    border-radius:20px;
+    text-decoration:none;
+    font-size:0.85rem;
+}
+
+.nav-cart:hover{
+    color:#fff;
+    transform:translateY(-2px);
+}
+
+.cart-badge{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    background:#FFD166;
+    color:#000;
+    font-size:0.7rem;
+    font-weight:700;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* BUTTON */
+.btn{
+    padding:14px 30px;
+    background:linear-gradient(135deg,var(--primary),#ff7a5c);
+    color:#fff;
+    font-weight:600;
+    border:none;
+    border-radius:30px;
+    text-decoration:none;
+    transition:0.3s;
+    display:inline-block;
+}
+
+.btn:hover{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow:0 10px 30px rgba(255,90,60,0.4);
+}
+
+/* MAIN */
+main{
+    padding-top:90px;
+}
+
+/* FOOTER */
+footer{
+    margin-top:100px;
+    padding:80px 20px 20px;
+    background:#fff;
+}
+
+.footer-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-grid h3{
+    color:var(--primary);
+    margin-bottom:15px;
+}
+
+.footer-grid a{
+    display:block;
+    margin-bottom:8px;
+    color:var(--muted);
+    text-decoration:none;
+}
+
+.footer-grid a:hover{
+    color:var(--primary);
+}
+
+.footer-bottom{
+    text-align:center;
+    margin-top:50px;
+    color:#aaa;
+}
+.logo img{
+    height:95px;
+    width:auto;
+    object-fit:contain;
+}
+.logo{
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    height:75px;
+    transition:0.3s ease;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+}
+
+.logo img:hover{
+    transform:scale(1.05);
+}
+
+/* WHATSAPP */
+.whatsapp{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#25d366;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    color:#fff;
+    text-decoration:none;
+    box-shadow:var(--shadow);
+    transition:0.3s;
+}
+
+.whatsapp:hover{
+    transform:scale(1.1);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    nav ul{
+        display:none;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    /* Mobile nav improvements */
+    nav{
+        padding:12px 15px;
+    }
+
+    .logo img{
+        height:50px;
+    }
+
+    main{
+        padding-top:60px;
+    }
+
+    footer{
+        margin-top:60px;
+        padding:50px 20px 20px;
+    }
+
+    .footer-grid{
+        gap:30px;
+    }
+
+    .footer-grid h3{
+        font-size:1.1rem;
+        margin-bottom:10px;
+    }
+
+    .footer-grid a{
+        font-size:0.9rem;
+    }
+
+    .footer-bottom{
+        margin-top:30px;
+        font-size:0.85rem;
+    }
+}
+</style>
+
+{% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<header>
+<nav>
+<div class="logo">
+    <img src="{% static 'images/logo.png' %}" alt="Molteno Grill">
+</div>
+
+<ul>
+<li><a href="{% url 'home' %}">Home</a></li>
+<li><a href="{% url 'menu' %}">Menu</a></li>
+<li><a href="{% url 'about' %}">About</a></li>
+<li><a href="{% url 'contact' %}">Reservations</a></li>
+<li><a href="{% url 'cart' %}" class="nav-cart">🛒 Cart<span class="cart-badge">{{ cart_count|default:"0" }}</span></a></li>
+</ul>
+</nav>
+</header>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer>
+<div class="footer-grid">
+
+<div>
+<h3>Molteno Grill</h3>
+<p style="color:#777;font-size:0.9rem;">
+Modern dining experience with bold flavors and unforgettable meals.
+</p>
+</div>
+
+<div>
+<h3>Navigation</h3>
+<a href="{% url 'home' %}">Home</a>
+<a href="{% url 'menu' %}">Menu</a>
+<a href="{% url 'about' %}">About</a>
+<a href="{% url 'contact' %}">Reservations</a>
+</div>
+
+<div>
+<h3>Hours</h3>
+<a>Mon - Fri: 11am - 10pm</a>
+<a>Sat: 11am - 11pm</a>
+<a>Sun: 10am - 9pm</a>
+</div>
+
+<div>
+<h3>Contact</h3>
+<a>+27 000 000 000</a>
+<a>info@moltenogrill.co.za</a>
+<a>Bloemfontein, SA</a>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+© 2026 Molteno Grill House
+</div>
+</footer>
+
+</a>
+
+</body>
+</html>

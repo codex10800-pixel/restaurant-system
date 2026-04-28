@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+
+{% block title %}Reservations | Molteno Grill House{% endblock %}
+
+{% block extra_css %}
+<style>
+
+:root{
+    --gold:#c9a227;
+    --black:#0d0d0d;
+    --muted:#777;
+}
+
+/* HERO */
+.contact-hero{
+    height:50vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#fff;
+    position:relative;
+    background:url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1600') center/cover no-repeat;
+}
+
+.contact-hero::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.65);
+}
+
+.contact-hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.contact-hero h1{
+    font-size:3rem;
+}
+
+.contact-hero p{
+    opacity:0.8;
+}
+
+/* PAGE */
+.contact-page{
+    max-width:1100px;
+    margin:auto;
+    padding:80px 20px;
+}
+
+/* GRID */
+.contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:60px;
+}
+
+/* INFO */
+.info h2{
+    margin-bottom:10px;
+}
+
+.info p{
+    color:var(--muted);
+}
+
+/* CARDS */
+.card{
+    display:flex;
+    gap:15px;
+    padding:20px;
+    border-radius:12px;
+    background:#fff;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    margin-top:15px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+/* FORM (GLASS EFFECT 🔥) */
+.form{
+    padding:30px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(10px);
+    box-shadow:0 20px 50px rgba(0,0,0,0.1);
+}
+
+/* INPUT GROUP */
+.input-group{
+    position:relative;
+    margin-bottom:20px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    background:#fff;
+    outline:none;
+}
+
+/* FLOAT LABEL */
+.input-group label{
+    position:absolute;
+    top:50%;
+    left:12px;
+    transform:translateY(-50%);
+    background:#fff;
+    padding:0 5px;
+    font-size:0.8rem;
+    color:#999;
+    transition:0.3s;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group textarea:focus + label,
+.input-group textarea:not(:placeholder-shown) + label{
+    top:-8px;
+    font-size:0.7rem;
+    color:var(--gold);
+}
+
+/* ROW */
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+/* BUTTON */
+.btn{
+    width:100%;
+    padding:16px;
+    background:linear-gradient(135deg,var(--gold),#e6c65a);
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.02);
+}
+
+/* SUCCESS */
+.success{
+    background:#e6f7ea;
+    padding:15px;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .contact-grid{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+    .row{
+        grid-template-columns:1fr;
+    }
+
+    .contact-hero h1{
+        font-size:2.2rem;
+    }
+
+    .contact-hero{
+        height:40vh;
+        min-height:300px;
+    }
+
+    .contact-page{
+        padding:50px 20px;
+    }
+
+    .info h2{
+        font-size:1.8rem;
+    }
+
+    .card{
+        padding:15px;
+        flex-direction:column;
+        gap:10px;
+        align-items:center;
+        text-align:center;
+    }
+
+    .form{
+        padding:25px 20px;
+    }
+
+    .input-group{
+        margin-bottom:15px;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea{
+        padding:12px;
+        font-size:1rem;
+    }
+
+    .btn{
+        padding:14px;
+        font-size:1rem;
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="contact-hero">
+    <div class="contact-hero-content">
+        <h1>Reserve Your Table</h1>
+        <p>Book in seconds. Enjoy unforgettable dining.</p>
+    </div>
+</section>
+
+<div class="contact-page">
+
+<div class="contact-grid">
+
+<!-- INFO -->
+<div class="info">
+    <h2>Visit Us</h2>
+    <p>Experience premium dining in a relaxed and elegant atmosphere.</p>
+
+    <div class="card">📍 Molteno, Eastern Cape, South Africa</div>
+    <div class="card">📞 +27 656 201 771</div>
+    <div class="card">✉️ bookings@moltenogrill.co.za</div>
+    <div class="card">🕒 Mon - Sun: 11:00 - 22:00</div>
+</div>
+
+<!-- FORM -->
+<div class="form">
+
+    {% if success %}
+    <div class="success">
+        Reservation received. We'll contact you shortly.
+    </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="input-group">
+            <input type="text" name="name" required placeholder=" ">
+            <label>Full Name</label>
+        </div>
+
+        <div class="row">
+            <div class="input-group">
+                <input type="email" name="email" required placeholder=" ">
+                <label>Email</label>
+            </div>
+
+            <div class="input-group">
+                <input type="tel" name="phone" required placeholder=" ">
+                <label>Phone</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group">
+                <input type="date" name="date" required>
+            </div>
+
+            <div class="input-group">
+                <input type="time" name="time" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <select name="guests" required>
+                <option value="">Guests</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6+</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <textarea name="message" rows="3" placeholder=" "></textarea>
+            <label>Special Requests</label>
+        </div>
+
+        <button class="btn">Reserve Instantly →</button>
+        <p style="text-align:center; margin-top:15px; color:#777; font-size:0.85rem;">📱 Instant confirmation via WhatsApp</p>
+
+    </form>
+
+</div>
+
+</div>
+</div>
+
+{% endblock %}

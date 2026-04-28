@@ -1,0 +1,334 @@
+{% extends 'base.html' %}
+
+{% block title %}About | Molteno Grill House{% endblock %}
+
+{% block extra_css %}
+<style>
+
+:root{
+    --gold:#c9a227;
+    --black:#0d0d0d;
+    --muted:#777;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.about-hero{
+    height:60vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#fff;
+    position:relative;
+    background:url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=1920') center/cover no-repeat;
+}
+
+.about-hero::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+}
+
+.about-hero-content{
+    position:relative;
+    z-index:2;
+    animation:fadeUp 1s ease forwards;
+}
+
+.about-hero h1{
+    font-size:3.5rem;
+}
+
+.about-hero p{
+    margin-top:10px;
+    color:rgba(255,255,255,0.8);
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.about-page{
+    max-width:1100px;
+    margin:auto;
+    padding:80px 20px;
+}
+
+/* =========================
+   GRID SECTIONS
+========================= */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+    margin-bottom:100px;
+}
+
+.about-text h2{
+    font-size:2.2rem;
+    margin-bottom:15px;
+}
+
+.about-text p{
+    color:var(--muted);
+    line-height:1.8;
+    margin-bottom:15px;
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.about-image{
+    overflow:hidden;
+    border-radius:12px;
+}
+
+.about-image img{
+    width:100%;
+    height:450px;
+    object-fit:cover;
+    transition:0.6s ease;
+}
+
+.about-image:hover img{
+    transform:scale(1.08);
+}
+
+/* =========================
+   SECOND BLOCK (REVERSE)
+========================= */
+
+.reverse{
+    direction:rtl;
+}
+
+.reverse .about-text{
+    direction:ltr;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    margin-top:60px;
+}
+
+.stat{
+    padding:40px 20px;
+    background:#fff;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    transition:0.3s;
+}
+
+.stat:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 50px rgba(0,0,0,0.1);
+}
+
+.stat h3{
+    font-size:2.5rem;
+    color:var(--gold);
+}
+
+.stat p{
+    color:var(--muted);
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+/* =========================
+   REVEAL ANIMATION
+========================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:0.8s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .about-grid{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+    .reverse{
+        direction:ltr;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .about-hero h1{
+        font-size:2.5rem;
+    }
+
+    .about-hero{
+        height:45vh;
+        min-height:300px;
+    }
+
+    .about-page{
+        padding:50px 20px;
+    }
+
+    .about-text h2{
+        font-size:1.8rem;
+    }
+
+    .about-text p{
+        font-size:0.95rem;
+        line-height:1.7;
+    }
+
+    .about-image img{
+        height:300px;
+    }
+
+    .stat{
+        padding:30px 20px;
+    }
+
+    .stat h3{
+        font-size:2rem;
+    }
+
+    .stat p{
+        font-size:0.75rem;
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="about-hero">
+    <div class="about-hero-content">
+        <h1>Our Story</h1>
+        <p>Where passion meets fire and flavor becomes art</p>
+    </div>
+</section>
+
+<!-- CONTENT -->
+<div class="about-page">
+
+    <!-- BLOCK 1 -->
+    <div class="about-grid reveal">
+
+        <div class="about-text">
+            <h2>Built on Passion</h2>
+            <p>
+                Molteno Grill House was founded with one mission — to create bold,
+                unforgettable dining experiences through premium grilled cuisine.
+            </p>
+            <p>
+                Every dish we serve reflects dedication, creativity, and a deep love
+                for culinary excellence.
+            </p>
+        </div>
+
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1000">
+        </div>
+
+    </div>
+
+    <!-- BLOCK 2 -->
+    <div class="about-grid reverse reveal">
+
+        <div class="about-text">
+            <h2>Crafted with Precision</h2>
+            <p>
+                From sourcing fresh ingredients to perfecting every recipe,
+                we focus on quality at every step.
+            </p>
+            <p>
+                Our kitchen is driven by innovation, blending modern techniques
+                with timeless flavors.
+            </p>
+        </div>
+
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=1000">
+        </div>
+
+    </div>
+
+    <!-- STATS -->
+    <div class="stats reveal">
+
+        <div class="stat">
+            <h3>5+</h3>
+            <p>Years Experience</p>
+        </div>
+
+        <div class="stat">
+            <h3>50K+</h3>
+            <p>Happy Customers</p>
+        </div>
+
+        <div class="stat">
+            <h3>100+</h3>
+            <p>Signature Meals</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- SCROLL ANIMATION -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add("active");
+            }
+        });
+    }, { threshold: 0.15 });
+
+    elements.forEach(el => observer.observe(el));
+});
+</script>
+
+{% endblock %}

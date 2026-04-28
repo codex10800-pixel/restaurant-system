@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Payment Cancelled | Molteno Grill House{% endblock %}
+
+{% block extra_css %}
+<style>
+body{
+    background:#fafafa;
+}
+
+.cancel-container{
+    max-width:500px;
+    margin:auto;
+    padding:60px 20px;
+    text-align:center;
+}
+
+.cancel-icon{
+    width:100px;
+    height:100px;
+    background:#ff4444;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 30px;
+    font-size:50px;
+    color:#fff;
+}
+
+.cancel-container h1{
+    font-size:2rem;
+    margin-bottom:15px;
+    color:#ff4444;
+}
+
+.cancel-container > p{
+    color:#777;
+    font-size:1.1rem;
+    margin-bottom:40px;
+}
+
+.action-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.btn{
+    display:block;
+    padding:16px 30px;
+    border-radius:12px;
+    font-size:1rem;
+    font-weight:600;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,#c9a227,#b8921f);
+    color:#000;
+}
+
+.btn-primary:hover{
+    transform:scale(1.02);
+}
+
+.btn-secondary{
+    background:#fff;
+    color:#333;
+    border:2px solid #eee;
+}
+
+.btn-secondary:hover{
+    border-color:#c9a227;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="cancel-container">
+    <div class="cancel-icon">✕</div>
+    
+    <h1>Payment Cancelled</h1>
+    <p>Your order was not completed. No charges have been made to your account.</p>
+    
+    <div class="action-buttons">
+        <a href="{% url 'checkout' %}" class="btn btn-primary">
+            Try Again →
+        </a>
+        <a href="{% url 'menu' %}" class="btn btn-secondary">
+            Back to Menu
+        </a>
+    </div>
+</div>
+
+{% endblock %}

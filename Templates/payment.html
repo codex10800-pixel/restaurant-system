@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Payment | Molteno Grill House{% endblock %}
+
+{% block extra_css %}
+<style>
+body{
+    background:#fafafa;
+}
+
+.payment-container{
+    max-width:600px;
+    margin:auto;
+    padding:40px 20px;
+    text-align:center;
+}
+
+.payment-header{
+    margin-bottom:40px;
+}
+
+.payment-header h1{
+    font-size:2.5rem;
+    margin-bottom:10px;
+}
+
+.payment-header p{
+    color:#777;
+}
+
+/* ORDER INFO */
+.order-info{
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.order-number{
+    font-size:1.5rem;
+    font-weight:700;
+    color:#c9a227;
+    margin-bottom:20px;
+}
+
+.order-details{
+    text-align:left;
+    margin-bottom:25px;
+}
+
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #f5f5f5;
+}
+
+.detail-row:last-child{
+    border-bottom:none;
+}
+
+.detail-row .label{
+    color:#777;
+}
+
+.detail-row .value{
+    font-weight:600;
+}
+
+.total-amount{
+    font-size:1.8rem;
+    color:#c9a227;
+    font-weight:700;
+    padding-top:20px;
+    border-top:2px solid #eee;
+}
+
+/* PAYMENT FORM */
+.payfast-form{
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.payfast-form h2{
+    margin-bottom:20px;
+}
+
+.pay-btn{
+    display:block;
+    width:100%;
+    padding:18px;
+    background:linear-gradient(135deg,#c9a227,#b8921f);
+    color:#000;
+    border:none;
+    border-radius:12px;
+    font-size:1.1rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:20px;
+}
+
+.pay-btn:hover{
+    transform:scale(1.02);
+    box-shadow:0 10px 30px rgba(201,162,39,0.4);
+}
+
+.secure-notice{
+    margin-top:20px;
+    color:#777;
+    font-size:0.9rem;
+}
+
+.secure-notice span{
+    color:#28a745;
+}
+
+/* CANCEL LINK */
+.cancel-link{
+    display:block;
+    margin-top:25px;
+    color:#777;
+}
+
+.cancel-link:hover{
+    color:#ff4444;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="payment-container">
+    <div class="payment-header">
+        <h1>💳 Payment</h1>
+        <p>Secure payment via PayFast</p>
+    </div>
+
+    <div class="order-info">
+        <div class="order-number">{{ order.order_number }}</div>
+        
+        <div class="order-details">
+            <div class="detail-row">
+                <span class="label">Customer</span>
+                <span class="value">{{ order.customer_name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Phone</span>
+                <span class="value">{{ order.phone }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Pickup Time</span>
+                <span class="value">{{ order.pickup_time }}</span>
+            </div>
+        </div>
+        
+        <div class="detail-row total-amount">
+            <span>Total</span>
+            <span>R{{ order.total|floatformat:2 }}</span>
+        </div>
+    </div>
+
+    <div class="payfast-form">
+        <h2>Pay with PayFast</h2>
+        <p style="color:#777; margin-bottom:20px;">
+            You will be redirected to PayFast to complete your payment securely.
+        </p>
+        
+        <form action="{{ payfast_url }}" method="POST">
+            {% for key, value in pf_data.items %}
+            <input type="hidden" name="{{ key }}" value="{{ value }}">
+            {% endfor %}
+            
+            <button type="submit" class="pay-btn">
+                Pay R{{ order.total|floatformat:2 }} Now →
+            </button>
+        </form>
+        
+        <p class="secure-notice">
+            🔒 <span>Secure Payment</span> powered by PayFast
+        </p>
+        
+        <a href="{% url 'payment_cancel' order.id %}" class="cancel-link">
+            Cancel Order
+        </a>
+    </div>
+</div>
+
+{% endblock %}

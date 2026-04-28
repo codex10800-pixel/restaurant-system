@@ -1,0 +1,372 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Molteno Grill House | Fresh & Modern Dining{% endblock %}
+
+{% block extra_css %}
+<style>
+
+/* =========================
+   GLOBAL SCROLL BEHAVIOUR
+========================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* =========================
+   REVEAL ANIMATION SYSTEM
+========================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================
+   BUTTON SHINE EFFECT
+========================= */
+
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.25);
+    transition: 0.5s;
+}
+
+.btn:hover::after {
+    left: 100%;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    color:#fff;
+    background:url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=1920') center/cover no-repeat;
+}
+
+.hero::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(255,90,60,0.85),
+        rgba(255,209,102,0.75),
+        rgba(6,214,160,0.7)
+    );
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:800px;
+    padding:20px;
+    animation: heroFade 1.2s ease forwards;
+}
+
+@keyframes heroFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h1{
+    font-size:4rem;
+}
+
+.hero p{
+    margin:20px 0;
+    color:#f1f1f1;
+}
+
+/* =========================
+   SECTION BASE
+========================= */
+
+.section{
+    padding:100px 20px;
+    text-align:center;
+}
+
+.section h2{
+    font-size:2.5rem;
+    margin-bottom:10px;
+}
+
+.section .sub{
+    color:var(--muted);
+    margin-bottom:60px;
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    max-width:1100px;
+    margin:auto;
+}
+
+.card{
+    padding:40px;
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    transition:0.6s ease;
+}
+
+.card:hover{
+    transform:translateY(-12px) scale(1.02);
+    box-shadow:var(--shadow-strong);
+}
+
+/* =========================
+   MENU GRID
+========================= */
+
+.menu{
+    background:#fff;
+}
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.item{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    transition:0.6s ease;
+}
+
+.item:hover{
+    transform:translateY(-10px) scale(1.02);
+}
+
+.item img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.item-content{
+    padding:20px;
+    text-align:left;
+}
+
+.price{
+    color:var(--primary);
+    font-weight:700;
+    margin-top:10px;
+}
+
+/* =========================
+   CTA SECTION
+========================= */
+
+.cta{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:#fff;
+    border-radius:30px;
+    margin:40px;
+    padding:80px 20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+    .features,.menu-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:2.5rem;
+    }
+
+    .hero p{
+        font-size:0.95rem;
+    }
+
+    .section{
+        padding:60px 20px;
+    }
+
+    .section h2{
+        font-size:1.8rem;
+    }
+
+    .section .sub{
+        margin-bottom:40px;
+    }
+
+    .card{
+        padding:30px 20px;
+    }
+
+    .card h3{
+        font-size:1.3rem;
+    }
+
+    .card p{
+        font-size:0.9rem;
+    }
+
+    .item img{
+        height:180px;
+    }
+
+    .item-content{
+        padding:15px;
+    }
+
+    .item-content h3{
+        font-size:1.1rem;
+    }
+
+    .item-content p{
+        font-size:0.85rem;
+    }
+
+    .price{
+        font-size:1rem;
+    }
+
+    .cta{
+        margin:20px;
+        padding:50px 20px;
+        border-radius:20px;
+    }
+
+    .cta h2{
+        font-size:1.8rem;
+    }
+
+    .cta p{
+        font-size:0.95rem;
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Fresh. Bold. Delicious.</h1>
+        <p>Experience vibrant flavors crafted with passion and creativity.</p>
+        <a href="{% url 'menu' %}" class="btn">Explore Menu</a>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section reveal">
+    <h2>Why Choose Us</h2>
+    <p class="sub">We bring energy, flavor, and passion into every dish.</p>
+
+    <div class="features">
+        <div class="card">
+            <h3>Fresh Ingredients</h3>
+            <p>Locally sourced and always fresh for the best taste.</p>
+        </div>
+
+        <div class="card">
+            <h3>Creative Dishes</h3>
+            <p>Unique recipes crafted for unforgettable experiences.</p>
+        </div>
+
+        <div class="card">
+            <h3>Fast Service</h3>
+            <p>Delicious meals served quickly without compromising quality.</p>
+        </div>
+    </div>
+</section>
+
+<!-- MENU -->
+{% if featured_items %}
+<section class="section menu reveal">
+    <h2>Popular Dishes</h2>
+    <p class="sub">Customer favorites you’ll love</p>
+
+    <div class="menu-grid">
+        {% for item in featured_items %}
+        <div class="item">
+            <img src="{{ item.image }}" alt="{{ item.name }}">
+            <div class="item-content">
+                <h3>{{ item.name }}</h3>
+                <p>{{ item.description|truncatechars:80 }}</p>
+                <div class="price">R{{ item.price }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA -->
+<section class="cta reveal">
+    <h2>Ready to Eat?</h2>
+    <p>Book a table or order now and enjoy the experience.</p>
+    <a href="{% url 'contact' %}" class="btn">Make Reservation</a>
+</section>
+
+<!-- SCROLL ANIMATION SCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    elements.forEach(el => observer.observe(el));
+});
+</script>
+
+{% endblock %}
