@@ -131,6 +131,12 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
-
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_TRUSTED_ORIGINS = [
+    "https://molteno-grill-house.onrender.com"
+]
