@@ -274,37 +274,40 @@ footer{
     cursor: pointer;
     color: var(--primary);
 }
+.menu-toggle {
+    display: none; /* hidden by default */
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--primary);
+}
 
-/* MOBILE MENU */
-@media(max-width:900px){
+/* DESKTOP (default) */
+nav ul {
+    display: flex;
+}
+
+/* MOBILE ONLY */
+@media (max-width: 900px) {
 
     .menu-toggle {
-        display: block;
+        display: block; /* ONLY SHOW ON MOBILE */
     }
 
     nav ul {
+        display: none; /* hide menu by default */
         position: absolute;
         top: 70px;
         left: 0;
         right: 0;
         background: #fff;
         flex-direction: column;
-        gap: 15px;
         padding: 20px;
-        display: none;
+        gap: 15px;
         box-shadow: var(--shadow);
     }
 
     nav ul.show {
         display: flex;
-    }
-
-    nav ul li {
-        text-align: center;
-    }
-
-    .nav-cart {
-        justify-content: center;
     }
 }
 </style>
